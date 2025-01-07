@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html style="background-color: #ffffff;">
+<head>
+<style>
+  body {
+    text-align: center;
+    font-family: sans-serif;
+    background-image: url("https://www.transparenttextures.com/patterns/white-noise.png"); /* Simple background pattern */
+    background-size: cover;
+  }
+
+  #question {
+    font-size: 24px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px auto;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transform transition */
+  }
+
+  .button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Added transform transition */
+  }
+
+  .button:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+  }
+
+  #yesButton {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+
+  #noButton {
+    background-color: #f44336; /* Red */
+    color: white;
+    position: relative; /* Needed for positioning */
+  }
+
+  #message {
+    font-size: 24px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px auto;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Added transform transition */
+  }
+
+  /* Cool transition for messages */
+  #question, #message {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  #question.show, #message.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<div id="question" class="show">
+  Bati na tayo?
+</div>
+
+<button id="yesButton" class="button">Yes</button>
+<button id="noButton" class="button">No</button>
+
+<div id="message" style="display:none;">
+  <!-- Your message will go here -->
+  YAY!!I love you po😘
+</div>
+
+<script>
+  const question = document.getElementById("question");
+  const yesButton = document.getElementById("yesButton");
+  const noButton = document.getElementById("noButton");
+  const message = document.getElementById("message");
+  let currentX = 0;
+  let currentY = 0;
+
+  yesButton.addEventListener("click", () => {
+    question.classList.remove("show");
+    setTimeout(() => {
+      message.classList.add("show");
+      message.style.display = "block";
+    }, 500);
+  });
+
+  noButton.addEventListener("click", () => {
+    let randomDirection = Math.floor(Math.random() * 4); // 0: up, 1: down, 2: right, 3: left
+    let randomDistance = Math.random() * 20 + 10; // Random distance between 10 and 30 pixels
+
+    if (randomDirection === 0) {
+      currentY -= randomDistance;
+      noButton.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    } else if (randomDirection === 1) {
+      currentY += randomDistance;
+      noButton.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    } else if (randomDirection === 2) {
+      currentX += randomDistance;
+      noButton.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    } else {
+      currentX -= randomDistance;
+      noButton.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    }
+  });
+</script>
+
+</body>
+</html>
